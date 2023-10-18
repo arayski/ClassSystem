@@ -1,15 +1,39 @@
 <template>
   <main class="home">
-    <h2>The Home Page</h2>
+    <h2>My Schedule</h2>
     <p>
-      This application includes this home page, a page that fetches data, and a
-      page that handles state in a form.
+      PlaceHolder Classes
     </p>
-    <p>
-      These pages, along with the structure of the project, are designed to help
-      you get started solving similar technical challenges, based on the
-      features you are looking to add to your application.
-    </p>
+    <ul>
+      <li>Class 1</li>
+      <li>Instructor</li>
+      <li>Time</li>
+      <li>Location</li>
+    </ul>
+    <br>
+    <ul>
+      <li>Class 2</li>
+      <li>Instructor</li>
+      <li>Time</li>
+      <li>Location</li>
+    </ul>
+    <br>
+    <ul>
+      <li>Class 3</li>
+      <li>Instructor</li>
+      <li>Time</li>
+      <li>Location</li>
+    </ul>
+    <br>
+    <ul>
+      <li>Class 4</li>
+      <li>Instructor</li>
+      <li>Time</li>
+      <li>Location</li>
+    </ul>
+
+    
+    
   </main>
 </template>
 
@@ -19,8 +43,9 @@
 }
 
 .home h2 {
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
+  font-size: 40px;
+  margin-bottom: 1rem;
+  color: #000E2F;
 }
 
 .home p {

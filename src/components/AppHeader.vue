@@ -4,7 +4,7 @@
       <nav class="nav">
             <RouterLink to="/">Home</RouterLink>
             <RouterLink to="/fetch">My Classes</RouterLink>
-            <RouterLink to="/fetch">Select Classes</RouterLink>
+            <RouterLink to="/search">Select Classes</RouterLink>
             <RouterLink to="/fetch">Schedule</RouterLink>
 
             <!--

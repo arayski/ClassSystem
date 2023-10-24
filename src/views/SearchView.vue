@@ -1,13 +1,11 @@
 <template>
   <main class=search>
-    <div class="search panel">
-      <input type="text" v-model="search" placeholder="Search Classes...">
-      <div class="item O_class" v-for="O_class in filterclasses()" :key="O_class">
-        <p>{{ O_class }}</p>
-      </div>
-      <div class="item error" v-if="input&&!filterclasses().length">
-        <p>No results found!</p>
-      </div>
+    <input type="text" v-model="search" placeholder="Search Classes...">
+    <div class="item O_class" v-for="O_class in filterclasses()" :key="O_class">
+      <p>{{ O_class }}</p>
+    </div>
+    <div class="item error" v-if="input&&!filterclasses().length">
+      <p>No results found!</p>
     </div>
   </main>
 </template> 
@@ -69,7 +67,7 @@ input {
 }
 
 .O_class {
-  background-color: lightblue;
+  background-color: lightgrey;
   cursor: pointer;
 }
 

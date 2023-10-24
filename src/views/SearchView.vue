@@ -18,7 +18,7 @@ import { ref } from "vue";
 
 // Search Bar basic functionality
 let input = ref("");
-const classes = ["CSE2102", "CSE1010", "CSE2050"];
+const classes = ["CSE2102", "CSE1010", "CSE2050", "ANTH 1000", "LING 3610W"];
 function filterclasses() {
   return classes.filter((O_class) =>
   O_class.toLowerCase().includes(input.value.toLowerCase())
@@ -70,6 +70,7 @@ input {
 
 .O_class {
   background-color: rgb(97, 62, 252);
+  color: black;
   cursor: pointer;
 }
 

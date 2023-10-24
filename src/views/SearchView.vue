@@ -1,15 +1,17 @@
 <template>
   <main class=search>
-    <input type="text" placeholder="Search Classes..."/>
-    <div class="item class" :key="class">
-      <p>{{ class }}</p>
+    <div class="search panel">
+      <input type="text" v-model="search" placeholder="Search Classes...">
+      <div class="item O_class" v-for="O_class in filterclasses()" :key="O_class">
+        <p>{{ O_class }}</p>
+      </div>
+      <div class="item error" v-if="input&&!filterclasses().length">
+        <p>No results found!</p>
+      </div>
     </div>
-    //<div class="item error" >
-      //<p>No results found!</p>
-    //</div>
   </main>
-<template/>
-    
+</template> 
+
 <script setup>
 
 import { ref } from "vue";
@@ -18,7 +20,10 @@ import { ref } from "vue";
 let input = ref("");
 const classes = ["CSE2102", "CSE1010", "CSE2050"];
 function filterclasses() {
-  return classes.filter((class) => class.toLowerCase().includes(input.value.toLowerCase()));}
+  return classes.filter((O_class) =>
+  O_class.toLowerCase().includes(input.value.toLowerCase())
+  );
+} 
 
 </script>
 
@@ -63,7 +68,7 @@ input {
     rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
 
-.class {
+.O_class {
   background-color: rgb(97, 62, 252);
   cursor: pointer;
 }

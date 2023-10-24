@@ -46,7 +46,7 @@ body {
 
 input {
   display: block;
-  width: 1040px;
+  width: 1040px auto;
   margin: 20px auto;
   padding: 10px 45px;
   background: white url("assets/search-bar-icon.png") no-repeat 15px center;
@@ -59,7 +59,7 @@ input {
 }
 
 .item {
-  width: 790px;
+  width: 790px auto;
   margin: 0 auto 10px auto;
   padding: 10px 20px;
   color: white;
@@ -69,8 +69,7 @@ input {
 }
 
 .O_class {
-  background-color: rgb(97, 62, 252);
-  color: black;
+  background-color: plum;
   cursor: pointer;
 }
 

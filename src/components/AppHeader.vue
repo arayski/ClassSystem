@@ -1,23 +1,19 @@
 <template>
   <header class="app-header">
     <div>
-      <h1>{{ title }}</h1>
-      <nav>
-        <ul>
-          <li>
+      <nav class="nav">
             <RouterLink to="/">Home</RouterLink>
-          </li>
-          <li>
-            <RouterLink to="/fetch">Fetch Example</RouterLink>
-          </li>
-          <li>
+            <RouterLink to="/fetch">My Classes</RouterLink>
+            <RouterLink to="/fetch">Select Classes</RouterLink>
+            <RouterLink to="/fetch">Schedule</RouterLink>
+
             <!--
               This RouterLink does not point to a specific path, but rather the name of a route.
               Check out router/index.js for how this is defined
             -->
             <RouterLink :to="{ name: 'form' }">Form Example</RouterLink>
-          </li>
-        </ul>
+            <RouterLink to="/fetch">Logout</RouterLink>
+            
       </nav>
     </div>
   </header>
@@ -39,14 +35,31 @@ defineProps({
 <style>
 /* give the header itself a background color, a border, and add some padding to the content */
 .app-header {
-  background-color: #fcfcfc;
-  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: left;
+  background-color:#000E2F;
+  border-bottom: 1px solid gray;
   padding: 1rem;
 }
+
+.nav a {
+  color:white;
+  padding: 16px;
+  text-decoration: none;
+  font-size: 17px;
+  margin-right: 5px;
+}
+
+.nav a:hover {
+  background-color:#ddd;
+  color:#000E2F; 
+}
+
 
 /* make the title within the header a larger and bolder font */
 .app-header h1 {
   font-size: 2rem;
   font-weight: bold;
+  color:white;
 }
 </style>

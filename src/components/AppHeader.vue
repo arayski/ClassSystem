@@ -12,7 +12,7 @@
               Check out router/index.js for how this is defined
             -->
             <RouterLink :to="{ name: 'form' }">Form Example</RouterLink>
-            <RouterLink to="/fetch">Logout</RouterLink>
+            <RouterLink to="/login">Logout</RouterLink>
             
       </nav>
     </div>

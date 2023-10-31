@@ -7,6 +7,7 @@ import FormView from "../views/FormView.vue";
 import FetchView from "../views/FetchView.vue";
 import LoginView from "../views/LoginView.vue";
 import SearchView from "../views/SearchView.vue";
+import ClassesView from "../views/ClassesView.vue";
 
 const router = createRouter({
   // the history mode determines how vue router interacts with the url.
@@ -46,6 +47,11 @@ const router = createRouter({
       path: "/search",
       name: "search",
       component: SearchView,
+    },
+    {
+      path: "/classes",
+      name: "classes",
+      component: ClassesView,
     },
   ],
 });

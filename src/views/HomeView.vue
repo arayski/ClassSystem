@@ -1,21 +1,21 @@
 <template>
   <main class="home">
-    <h2>My Schedule</h2>
+    <h2>My Home</h2>
     <div class="box-container">
       <div class="box">
-        <img src="enrollment-icon.png" alt="Class Enrollment" />
+        <img src="@/assets/enrollment-icon.png" alt="Class Enrollment" />
         <p>Class Enrollment</p>
       </div>
       <div class="box">
-        <img src="search-icon.png" alt="Class Search" />
+        <img src="@/assets/searchicon.png" alt="Class Search" />
         <p>Class Search</p>
       </div>
       <div class="box">
-        <img src="schedule-icon.png" alt="View Schedule" />
+        <img src="@/assets/schedule-icon.png" alt="View Schedule" />
         <p>View Schedule</p>
       </div>
       <div class="box">
-        <img src="profile-icon.png" alt="User Profile" />
+        <img src="@/assets/profile-icon.png" alt="User Profile" />
         <p>User Profile</p>
       </div>
     </div>

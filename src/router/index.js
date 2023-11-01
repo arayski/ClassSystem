@@ -53,6 +53,11 @@ const router = createRouter({
       name: "classes",
       component: ClassesView,
     },
+    {
+      path: "/user",
+      name: "user",
+      component: UserView,
+    },
   ],
 });
 

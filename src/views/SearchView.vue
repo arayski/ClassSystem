@@ -1,9 +1,18 @@
 <template>
   <main class=search>
     <input type="text" v-model="search" placeholder="Search Classes...">
-    <div class="item O_class" v-for="O_class in filterclasses()" :key="O_class">
-      <p>{{ O_class }}</p>
-    </div>
+    <button class="item classes" v-for="classInfo in classes" :key="O_class">
+      <p>{{ classInfo.name }}</p>
+
+      <div id="c_Modal" class="modal">
+        <header class="item classes"> {{ classInfo.name }}</header>
+        <div class="item classes">
+          <p><strong>Location:</strong> {{ classInfo.location }}</p>
+          <p><strong>Time:</strong> {{ classInfo.time }}</p>
+          <p><strong>Professor:</strong> {{ classInfo.professor }}</p>
+        </div>
+      </div>
+    </button>
     <div class="item error" v-if="input&&!filterclasses().length">
       <p>No results found!</p>
     </div>
@@ -16,12 +25,28 @@ import { ref } from "vue";
 
 // Search Bar basic functionality
 let input = ref("");
-const classes = ["CSE2102", "CSE1010", "CSE2050", "ANTH 1000", "LING 3610W"];
+
 function filterclasses() {
-  return classes.filter((O_class) =>
-  O_class.toLowerCase().includes(input.value.toLowerCase())
+  return classes.name.filter((classes) =>
+  classes.name.toLowerCase().includes(input.value.toLowerCase())
   );
 } 
+
+    data() ;{
+      return {
+        classes: [
+          { id: 1, name: 'CSE2050', location: 'ITE 138', time: 'Tu 10:00 AM - 11:50 AM', professor: 'Prof. Scoggin' },
+          { id: 2, name: 'MATH 2110', location: 'AUST 108', time: 'MoWeFr 10:10 AM -11:00 AM', professor: 'Prof. Hall' },
+          { id: 3, name: 'CHEM 2241', location: 'MCHU', time: 'TuTh 8:00am-9:15am', professor: 'Prof. Anwar' },
+          { id: 4, name: 'ME 2233', location: 'BOUS A106', time: 'TuTh 12:30 PM -1:45 PM', professor: 'Prof. Francesco' },
+          { id: 5, name: 'CSE2500', location: 'MCHU 101', time: 'TuTh 10:00 PM - 11:50 PM', professor: 'Prof. Mahmood' },
+          { id: 6, name: 'CSE1007', location: 'MCHU 101', time: 'TuTh 10:00 PM - 11:50 PM', professor: 'Prof. Dawson' },
+          
+          
+        ]
+      };
+    }
+
 
 </script>
 
@@ -66,9 +91,10 @@ input {
     rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
 
-.O_class {
-  background-color: lightgrey;
+.classes {
+  background-color: #000E2F;
   cursor: pointer;
+  color:white;
 }
 
 .error {

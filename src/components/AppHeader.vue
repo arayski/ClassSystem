@@ -6,6 +6,7 @@
             <RouterLink to="/classes">My Classes</RouterLink>
             <RouterLink to="/search">Search Classes</RouterLink>
             <RouterLink to="/fetch">Class Queue</RouterLink>
+            
 
             <!--
               This RouterLink does not point to a specific path, but rather the name of a route.

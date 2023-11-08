@@ -25,7 +25,7 @@
           { id: 3, name: 'CHEM 2241', location: 'MCHU', time: 'TuTh 8:00am-9:15am', professor: 'Prof. Anwar' },
           { id: 4, name: 'ME 2233', location: 'BOUS A106', time: 'TuTh 12:30 PM -1:45 PM', professor: 'Prof. Francesco' },
           { id: 5, name: 'CSE2500', location: 'MCHU 101', time: 'TuTh 10:00 PM - 11:50 PM', professor: 'Prof. Mahmood' },
-          { id: 6, name: 'CSE1007', location: 'MCHU 101', time: 'TuTh 10:00 PM - 11:50 PM', professor: 'Prof. Dawson' },
+          { id: 6, name: 'ENGL1007', location: 'MCHU 101', time: 'TuTh 10:00 PM - 11:50 PM', professor: 'Prof. Dawson' },
           
           
         ]

@@ -10,7 +10,8 @@ import SearchView from "../views/SearchView.vue";
 import ClassesView from "../views/ClassesView.vue";
 import ScheduleView from "../views/ScheduleView.vue";
 import ProfessorInformationView from "../views/ProfessorInformationView.vue";
-import ClassInformationView from "../views/ClassInformationView.vue"
+import ClassInformationView from "../views/ClassInformationView.vue";
+import ProfileView from "../views/ProfileView.vue";
 
 
 const router = createRouter({
@@ -72,6 +73,11 @@ const router = createRouter({
       component: ProfessorInformationView,
     },
 
+    {
+      path: "/Profile",
+      name: "Profile",
+      component: ProfileView,
+    },
 
     {
       path: "/classes",

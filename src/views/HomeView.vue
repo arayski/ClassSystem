@@ -17,7 +17,7 @@
         <p>View Schedule</p>
       </router-link>
 
-      <router-link to="/login" class="box">
+      <router-link to="/Profile" class="box">
         <img src="@/assets/profile-icon.png" alt="User Profile" />
         <p>User Profile</p>
       </router-link>

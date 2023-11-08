@@ -3,8 +3,8 @@
     <div>
       <nav class="nav">
             <RouterLink to="/">Home</RouterLink>
-            <RouterLink to="/classes">My Classes</RouterLink>
-            <RouterLink to="/search">Search Classes</RouterLink>
+            <RouterLink to="/classes">Enrolled Classes</RouterLink>
+            <RouterLink to="/search">Select Classes</RouterLink>
             <RouterLink to="/fetch">Class Queue</RouterLink>
             
 

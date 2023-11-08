@@ -2,34 +2,25 @@
   <main class="home">
     <h2>My Home</h2>
     <div class="box-container">
+      <router-link to="/classes" class="box">
+        <img src="@/assets/enrollment-icon.png" alt="Class Enrollment" />
+        <p>Class Enrollment</p>
+      </router-link>
 
-      <div class="box">
-
-
-        <form name="link" @submit.prevent="handleSubmit">
-
-          <img src="@/assets/enrollment-icon.png" alt="Class Enrollment" />
-          <button class="btn" type="submit">Class Enrollment</button>
-          
-        </form>
-      </div>
-
-      
-      <div class="box">
-        
+      <router-link to="/search" class="box">
         <img src="@/assets/searchicon.png" alt="Class Search" />
         <p>Class Search</p>
-      </div>
-      <div class="box">
+      </router-link>
+
+      <router-link to="/fetch" class="box">
         <img src="@/assets/schedule-icon.png" alt="View Schedule" />
         <p>View Schedule</p>
-      </div>
-      <div class="box">
+      </router-link>
+
+      <router-link to="/login" class="box">
         <img src="@/assets/profile-icon.png" alt="User Profile" />
         <p>User Profile</p>
-      </div>
-
-
+      </router-link>
     </div>
   </main>
 </template>
@@ -49,6 +40,7 @@ function handleSubmit() {
 <style>
 .home {
   padding: 1rem;
+  text-align: center;
 }
 
 .home h2 {
@@ -68,7 +60,20 @@ function handleSubmit() {
   padding: 1rem;
   border: 1px solid #ccc;
   border-radius: 8px;
-  width: 23%;
+  width: 20%; /* Adjust the width to your desired value */
+  transition: background-color 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .box img {

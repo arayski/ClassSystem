@@ -9,6 +9,9 @@ import LoginView from "../views/LoginView.vue";
 import SearchView from "../views/SearchView.vue";
 import ClassesView from "../views/ClassesView.vue";
 import ScheduleView from "../views/ScheduleView.vue";
+import ProfessorInformationView from "../views/ProfessorInformationView.vue";
+import ClassInformationView from "../views/ClassInformationView.vue"
+
 
 const router = createRouter({
   // the history mode determines how vue router interacts with the url.
@@ -56,6 +59,19 @@ const router = createRouter({
       name: "Schedule",
       component: ScheduleView,
     },
+
+    {
+      path: "/ClassInformation",
+      name: "ClassInformation",
+      component: ClassInformationView,
+    },
+
+    {
+      path: "/ProfessorInformation",
+      name: "ProfessorInformation",
+      component: ProfessorInformationView,
+    },
+
 
     {
       path: "/classes",

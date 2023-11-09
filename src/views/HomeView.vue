@@ -12,12 +12,12 @@
         <p>Class Search</p>
       </router-link>
 
-      <router-link to="/fetch" class="box">
+      <router-link to="/schedule" class="box">
         <img src="@/assets/schedule-icon.png" alt="View Schedule" />
         <p>View Schedule</p>
       </router-link>
 
-      <router-link to="/login" class="box">
+      <router-link to="/Profile" class="box">
         <img src="@/assets/profile-icon.png" alt="User Profile" />
         <p>User Profile</p>
       </router-link>

@@ -2,37 +2,53 @@
     <div class="main-content">
       <h1>Enrolled Classes</h1>
       <div class="container">
-        <div class="class-box" v-for="classInfo in classes" :key="classInfo.id">
+        <div class="class-box"  v-for="item in responseData.Items" :key="item.courseid.S">
           <div class="class-content">
-            <h2>{{ classInfo.name }}</h2>
-            <p><strong>Location:</strong> {{ classInfo.location }}</p>
-            <p><strong>Time:</strong> {{ classInfo.time }}</p>
-            <p><strong>Professor:</strong> {{ classInfo.professor }}</p>
+            <h2>{{ item.courseid.S }}</h2>
+            <p><strong>Location:</strong> {{ item.location.S}}</p>
+            <p><strong>Time:</strong> {{ item.time.S }}</p>
+            <p><strong>Professor:</strong> {{ item.intstructor.S }}</p>
           </div>
-          <button class="remove-btn">Unenroll</button>
+          <button class="removebutton" @click="unenrollClass(item.courseid.S)">Unenroll</button>
         </div>
       </div>
     </div>
   </template>
   
-  <script>
+<script>
   export default {
     data() {
       return {
-        classes: [
-          { id: 1, name: 'CSE2050', location: 'ITE 138', time: 'Tu 10:00 AM - 11:50 AM', professor: 'Prof. Scoggin' },
-          { id: 2, name: 'MATH 2110', location: 'AUST 108', time: 'MoWeFr 10:10 AM -11:00 AM', professor: 'Prof. Hall' },
-          { id: 3, name: 'CHEM 2241', location: 'MCHU', time: 'TuTh 8:00am-9:15am', professor: 'Prof. Anwar' },
-          { id: 4, name: 'ME 2233', location: 'BOUS A106', time: 'TuTh 12:30 PM -1:45 PM', professor: 'Prof. Francesco' },
-          { id: 5, name: 'CSE2500', location: 'MCHU 101', time: 'TuTh 10:00 PM - 11:50 PM', professor: 'Prof. Mahmood' },
-          { id: 6, name: 'ENGL1007', location: 'MCHU 101', time: 'TuTh 10:00 PM - 11:50 PM', professor: 'Prof. Dawson' },
-          
-          
-        ]
+        loading: true,
+        responseData: {},
+
       };
+    },
+    async mounted() {
+    const apiUrl = 'https://kyckkjoxeb.execute-api.us-east-1.amazonaws.com/newnew/all';
+    try {
+      const response = await fetch(apiUrl);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      this.responseData = await response.json();
+    } 
+    catch (error) {
+      console.error('Error fetching data:', error);
+    } 
+    finally {
+      this.loading = false;
     }
-  };
-  </script>
+  },
+
+  methods: {
+    unenrollClass(courseId) {
+      this.responseData.Items = this.responseData.Items.filter(item => item.courseid.S !== courseId);
+    }
+  },
+};
+
+</script>
   
   <style>
   .container {
@@ -79,7 +95,7 @@
     margin-top: 10px;
   }
 
-  .remove-btn {
+  .removebutton {
   background-color: red;
   color: white;
   border: none;
@@ -90,7 +106,7 @@
   
 }
 
-.remove-btn:hover {
+.removebutton:hover {
   background-color: #cc0000;
 }
 

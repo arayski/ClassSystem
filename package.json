@@ -9,6 +9,8 @@
     "start": "serve -s dist"
   },
   "dependencies": {
+    "@fullcalendar/daygrid": "^6.1.9",
+    "@fullcalendar/vue": "^6.1.9",
     "@unocss/reset": "^0.56.5",
     "serve": "^14.2.1",
     "vue": "^3.3.4",

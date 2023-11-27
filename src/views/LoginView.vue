@@ -2,13 +2,13 @@
     <div class="login-page">
         <div class="login-container">
             <form name="login-form" @submit.prevent="handleSubmit">
-            <div class="mb-3">
-                <label for="username">NetID: </label>
-                <input id="username" type="text" />
+            <div>
+                <label for="NetID">NetID: </label>
+                <input id="NetID" type="text" v-model="NetID" />
             </div>
-            <div class="mb-3">
+            <div>
                 <label for="password">Password: </label>
-                <input id="password" type="password" />
+                <input id="password" type="password" v-model="password" />
             </div>
             <button class="btn btn-outline-dark" type="submit">
                 Login
@@ -18,20 +18,33 @@
     </div>
 </template>
 
-
 <script setup>
+
+//Imports ref so we can check to see if valid netid or pass
+
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
+const NetID = ref('');
+const password = ref('');
+
+//Allows Login to work if its a useable Netid or Password, placeholder for now is 'admin'
+
 function handleSubmit() {
-    router.push('/')
-
+    // Useable Login Items, Use for now
+    const useNetID = 'admin';
+    const usePassword = 'admin';
+    // Example validation logic
+    if (NetID.value === useNetID && password.value === usePassword) {
+        router.push('/home');
+    } 
+    else{
+        alert('Invalid NetID or Password.');
+    }
 }
-
 </script>
-
-
 
 <style scoped>
 .login-page {
@@ -41,7 +54,6 @@ function handleSubmit() {
   background-position: center;
   background-repeat: no-repeat;
 }
-
 .login-container {
   background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for the form container */
   padding: 50px;
@@ -50,21 +62,17 @@ function handleSubmit() {
   margin: 0 auto; /* Optional: center the form horizontally */
   
 }
-
 .login-container label {
     font-size: 30px;
     color: #000E2F;
     
 }
-
-
 .login-container input {
     font-size: 30px;
     border-radius: 10px;
     color: #000E2F;
     width: 100%;
 }
-
 .login-container button {
     display: block;
     margin-left: auto;
@@ -76,7 +84,4 @@ function handleSubmit() {
     background-color:#000E2F;
     color:white;
 }
-
-
-
 </style>

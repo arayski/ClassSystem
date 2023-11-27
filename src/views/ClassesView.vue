@@ -5,9 +5,9 @@
         <div class="class-box"  v-for="item in responseData.Items" :key="item.courseid.S">
           <div class="class-content">
             <h2>{{ item.courseid.S }}</h2>
-            <p><strong>Location:</strong> {{ item.location.S}}</p>
+            <!--  <p><strong>Location:</strong> {{ item.location.S}}</p> 
             <p><strong>Time:</strong> {{ item.time.S }}</p>
-            <p><strong>Professor:</strong> {{ item.intstructor.S }}</p>
+            <p><strong>Professor:</strong> {{ item.intstructor.S }}</p> -->
           </div>
           <button class="removebutton" @click="unenrollClass(item.courseid.S)">Unenroll</button>
         </div>
@@ -25,7 +25,8 @@
       };
     },
     async mounted() {
-    const apiUrl = 'https://kyckkjoxeb.execute-api.us-east-1.amazonaws.com/newnew/all';
+    const apiUrl = import.meta.env.VITE_GET_ALL_API;
+    console.log(apiUrl)
     try {
       const response = await fetch(apiUrl);
       if (!response.ok) {
@@ -42,15 +43,36 @@
   },
 
   methods: {
-    unenrollClass(courseId) {
-      this.responseData.Items = this.responseData.Items.filter(item => item.courseid.S !== courseId);
+    unenrollClass(CourseID) {
+    //Call Delete API that deletes based on primary key in ClassDATA
+      const api = import.meta.env.VITE_DELETE_CLASS_API;
+      fetch(`${api}/${CourseID}`, {
+        method: 'DELETE',
+      })
+      
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(() => {
+        console.log('Class unenrolled successfully');
+
+      //update the local data as well to show change
+        this.responseData.Items = this.responseData.Items.filter(item => item.courseid.S !== CourseID);
+      })
+      .catch(error => {
+        console.error('Error unenrolling class:', error);
+     
+      });
     }
   },
-};
 
+};
 </script>
   
-  <style>
+<style>
   .container {
     display: flex;
     flex-direction: column;
@@ -62,13 +84,13 @@
   
   .class-box {
     display: flex;
-    align-items: center; /* Aligns items vertically in the center */
+    align-items: center; 
     justify-content: space-between;
     border: 1px solid #ddd;
     padding: 20px;
     margin: 10px 0;
     text-align: center;
-    width: 500px; /* Adjust width as needed */
+    width: 500px; 
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #000E2F;
@@ -96,13 +118,13 @@
   }
 
   .removebutton {
-  background-color: red;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 16px;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
   
 }
 
@@ -110,5 +132,5 @@
   background-color: #cc0000;
 }
 
-  </style>
+</style>
   

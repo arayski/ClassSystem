@@ -12,7 +12,8 @@ import ScheduleView from "../views/ScheduleView.vue";
 import ProfessorInformationView from "../views/ProfessorInformationView.vue";
 import ClassInformationView from "../views/ClassInformationView.vue";
 import ProfileView from "../views/ProfileView.vue";
-import APITestingView from "../views/APITestingView.vue";
+import StudentClassesView from "../views/StudentClassesView.vue";
+
 
 
 const router = createRouter({
@@ -59,7 +60,7 @@ const router = createRouter({
     {
       path: "/Schedule",
       name: "Schedule",
-      component: APITestingView,
+      component: StudentClassesView,
     },
 
     {

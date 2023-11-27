@@ -6,6 +6,15 @@ import HomeView from "../views/HomeView.vue";
 import FormView from "../views/FormView.vue";
 import FetchView from "../views/FetchView.vue";
 import LoginView from "../views/LoginView.vue";
+import SearchView from "../views/SearchView.vue";
+import ClassesView from "../views/ClassesView.vue";
+import ScheduleView from "../views/ScheduleView.vue";
+import ProfessorInformationView from "../views/ProfessorInformationView.vue";
+import ClassInformationView from "../views/ClassInformationView.vue";
+import ProfileView from "../views/ProfileView.vue";
+import StudentClassesView from "../views/StudentClassesView.vue";
+
+
 
 const router = createRouter({
   // the history mode determines how vue router interacts with the url.
@@ -40,6 +49,42 @@ const router = createRouter({
       path: "/login",
       name: "login",
       component: LoginView,
+    },
+
+    {
+      path: "/search",
+      name: "search",
+      component: SearchView,
+    },
+
+    {
+      path: "/Schedule",
+      name: "Schedule",
+      component: StudentClassesView,
+    },
+
+    {
+      path: "/ClassInformation",
+      name: "ClassInformation",
+      component: ClassInformationView,
+    },
+
+    {
+      path: "/ProfessorInformation",
+      name: "ProfessorInformation",
+      component: ProfessorInformationView,
+    },
+
+    {
+      path: "/Profile",
+      name: "Profile",
+      component: ProfileView,
+    },
+
+    {
+      path: "/classes",
+      name: "classes",
+      component: ClassesView,
     },
   ],
 });

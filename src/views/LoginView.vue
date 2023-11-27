@@ -1,7 +1,7 @@
 <template>
     <div class="login-page">
         <div class="login-container">
-            <form name="login-form" >
+            <form name="login-form" @submit.prevent="handleSubmit">
             <div class="mb-3">
                 <label for="username">NetID: </label>
                 <input id="username" type="text" />
@@ -18,9 +18,22 @@
     </div>
 </template>
 
+
+<script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+function handleSubmit() {
+    router.push('/')
+
+}
+
+</script>
+
+
+
 <style scoped>
-
-
 .login-page {
   height: 100vh; /* Cover the full viewport height */
   background-image: url('../assets/loginbackdrop.jpeg');
@@ -49,6 +62,7 @@
     font-size: 30px;
     border-radius: 10px;
     color: #000E2F;
+    width: 100%;
 }
 
 .login-container button {

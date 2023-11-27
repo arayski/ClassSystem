@@ -3,16 +3,20 @@
     <div>
       <nav class="nav">
             <RouterLink to="/">Home</RouterLink>
-            <RouterLink to="/fetch">My Classes</RouterLink>
-            <RouterLink to="/fetch">Select Classes</RouterLink>
-            <RouterLink to="/fetch">Schedule</RouterLink>
+            <RouterLink to="/classes">Enrolled Classes</RouterLink>
+            <RouterLink to="/search">Select Classes</RouterLink>
+            <RouterLink to="/fetch">Class Queue</RouterLink>
+            <RouterLink to="/Schedule">Schedule</RouterLink>
+            <RouterLink to="/Profile">Profile</RouterLink>
+
+
 
             <!--
               This RouterLink does not point to a specific path, but rather the name of a route.
               Check out router/index.js for how this is defined
             -->
-            <RouterLink :to="{ name: 'form' }">Form Example</RouterLink>
-            <RouterLink to="/fetch">Logout</RouterLink>
+            <!--<RouterLink :to="{ name: 'form' }">Form Example</RouterLink>-->
+            <RouterLink to="/login">Logout</RouterLink>
             
       </nav>
     </div>

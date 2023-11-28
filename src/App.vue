@@ -1,17 +1,27 @@
 <template>
   <div id="app-wrapper">
-    <AppHeader v-if="!isLoginPage" title="Class Enrollment" />
+    <!-- Render AppHeader based on showHeader, showHeader only after login-->
+    <AppHeader v-if="showHeader" />
     <RouterView />
   </div>
 </template>
 
 <script setup>
-import { RouterView, useRoute } from "vue-router";
-import { computed } from 'vue';
+import { RouterView } from 'vue-router';
+import { watch } from 'vue';
+import { ref } from 'vue';
+import { useRoute } from 'vue-router';
 import AppHeader from "./components/AppHeader.vue";
 
+// Controls the visibility of the AppHeader
+const showHeader = ref(true);
+
+// Use the useRoute composable to access the current route
 const route = useRoute();
 
-// Determine if the current page is the login page
-const isLoginPage = computed(() => route.path === '/login');
+// Watcher to update showHeader based on the route
+watch(route, (newRoute) => 
+{
+  showHeader.value = newRoute.name !== 'login';
+}, { immediate: true });
 </script>

@@ -88,8 +88,8 @@ function openModal(index) {
 }
 
 body {
-  padding: 20px;
-  min-height: 100vh;
+  /*padding: 20px;
+  min-height: 100vh;8*/
   background-color: rgb(234, 242, 255);
 }
 

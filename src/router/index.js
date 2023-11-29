@@ -3,8 +3,6 @@
 // we start by importing the createRouter and createWebHistory functions, as well as the components describing each of our views
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import FormView from "../views/FormView.vue";
-import FetchView from "../views/FetchView.vue";
 import LoginView from "../views/LoginView.vue";
 import SearchView from "../views/SearchView.vue";
 import ClassesView from "../views/ClassesView.vue";
@@ -35,16 +33,7 @@ const router = createRouter({
       name: "home",
       component: HomeView,
     },
-    {
-      path: "/form",
-      name: "form",
-      component: FormView,
-    },
-    {
-      path: "/fetch",
-      name: "fetch",
-      component: FetchView,
-    },
+
     {
       path: "/login",
       name: "login",
@@ -54,14 +43,14 @@ const router = createRouter({
     {
       path: "/search",
       name: "search",
-      component: SearchView,
+      component: ClassesView,
     },
 
     {
       path: "/Schedule",
       name: "Schedule",
       component: StudentClassesView,
-    },
+    }, 
 
     {
       path: "/ClassInformation",
@@ -84,7 +73,7 @@ const router = createRouter({
     {
       path: "/classes",
       name: "classes",
-      component: ClassesView,
+      component: StudentClassesView,
     },
   ],
 });

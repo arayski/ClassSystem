@@ -5,7 +5,6 @@
             <RouterLink to="/">Home</RouterLink>
             <RouterLink to="/classes">Enrolled Classes</RouterLink>
             <RouterLink to="/search">Select Classes</RouterLink>
-            <RouterLink to="/fetch">Class Queue</RouterLink>
             <RouterLink to="/Schedule">Schedule</RouterLink>
             <RouterLink to="/Profile">Profile</RouterLink>
 

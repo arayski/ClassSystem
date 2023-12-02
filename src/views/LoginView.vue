@@ -48,7 +48,7 @@ async function handleSubmit() {
         });
 
         if (response.ok) {
-            // Handle successful login
+            //successful login
             router.push('/'); 
         } else {
             const errorData = await response.json();
@@ -61,7 +61,7 @@ async function handleSubmit() {
             }
         }
     } catch (error) {
-        errorMessage.value = 'Network error. Please try again later.';
+        errorMessage.value = 'API Error.';
     }
 }
 </script>

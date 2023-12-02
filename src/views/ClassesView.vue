@@ -5,9 +5,9 @@
         <div class="class-box"  v-for="item in responseData.Items" :key="item.courseid.S">
           <div class="class-content">
             <h2>{{ item.courseid.S }}</h2>
-            <p><strong>Location:</strong> {{ item.location.S}}</p> 
+            <!--<p><strong>Location:</strong> {{ item.location.S}}</p> 
             <p><strong>Time:</strong> {{ item.time.S }}</p>
-            <p><strong>Professor:</strong> {{ item.intstructor.S }}</p> 
+            <p><strong>Professor:</strong> {{ item.intstructor.S }}</p> -->
           </div>
           <button class="removebutton" @click="unenrollClass(item.courseid.S)">Enroll</button>
         </div>

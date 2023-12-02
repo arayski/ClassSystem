@@ -33,22 +33,21 @@ const errorMessage = ref(''); // For displaying error messages
 
 async function handleSubmit() {
     errorMessage.value = ''; // Reset the error message on new submission
-
+    const api = import.meta.env.VITE_LOGIN;
     try {
-        const response = await fetch('YOUR_API_ENDPOINT', {
+        const response = await fetch(`${api}?netid=${username.value}&password=${password.value}`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-            },
-            body: JSON.stringify({
-                username: username.value,
-                password: password.value,
-            }),
+            
         });
 
         if (response.ok) {
+            //store netid to get items in db
+            localStorage.setItem('username', username.value);
+            //for getting user const value = localStorage.getItem('username');
+            // removing : localStorage.removeItem('myKey');
+            // clearing : localStorage.clear();
             //successful login
+
             router.push('/'); 
         } else {
             const errorData = await response.json();
@@ -63,6 +62,7 @@ async function handleSubmit() {
     } catch (error) {
         errorMessage.value = 'API Error.';
     }
+    
 }
 </script>
 
@@ -118,5 +118,14 @@ async function handleSubmit() {
     }
             
 
-
+/* const useNetID = 'admin';
+    const usePassword = 'admin';
+    // Example validation logic
+    if (NetID.value === useNetID && password.value === usePassword) {
+        router.push('/home');
+    } 
+    else{
+        alert('Invalid NetID or Password.');
+    } */
 </style>
+

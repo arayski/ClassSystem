@@ -1,77 +1,85 @@
 <template>
-    <div class="main-content">
-      <h1>Enrolled Classes</h1>
-      <div class="container">
-        <div class="class-box"  v-for="item in responseData.Items" :key="item.courseid.S">
-          <div class="class-content">
-            <h2>{{ item.courseid.S }}</h2>
-            <!--<p><strong>Location:</strong> {{ item.location.S}}</p> 
-            <p><strong>Time:</strong> {{ item.time.S }}</p>
-            <p><strong>Professor:</strong> {{ item.intstructor.S }}</p> -->
-          </div>
-          <button class="removebutton" @click="unenrollClass(item.courseid.S)">Enroll</button>
+  <div class="main-content">
+    <h1>Select Classes</h1>
+    <div v-if="loading" class="loading">Loading...</div>
+    <div v-else class="container">
+      <div class="class-box" v-for="item in responseData.Items" :key="item.courseid.S">
+        <div class="class-content">
+          <h2>{{ item.courseid.S }}</h2>
+          <p v-if="isEnrolled(item.courseid.S)">Enrolled</p>
+          <button class="removebutton" @click="enrollInClass('joe12345', item.courseid.S)" v-else>Enroll</button>
         </div>
       </div>
     </div>
-  </template>
-  
-<script>
-  export default {
-    data() {
-      return {
-        loading: true,
-        responseData: {},
+    <div v-if="error" class="error">{{ error }}</div>
+  </div>
+</template>
 
-      };
-    },
-    async mounted() {
-    const apiUrl = import.meta.env.VITE_GET_ALL_API;
-    console.log(apiUrl)
+<script>
+export default {
+  data() {
+    return {
+      loading: true,
+      responseData: {},
+      studentData: {},
+      error: null
+    };
+  },
+
+  async mounted() {
     try {
-      const response = await fetch(apiUrl);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      this.responseData = await response.json();
-    } 
-    catch (error) {
-      console.error('Error fetching data:', error);
-    } 
-    finally {
+      await Promise.all([this.fetchClasses(), this.getStudentInformation()]);
+    } catch (error) {
+      this.error = error.message;
+      console.error('Error in mounted:', error);
+    } finally {
       this.loading = false;
     }
   },
 
   methods: {
-    unenrollClass(CourseID) {
-    //Call Delete API that deletes based on primary key in ClassDATA
-      const api = import.meta.env.VITE_DELETE_CLASS_API;
-      fetch(`${api}/${CourseID}`, {
-        method: 'DELETE',
-      })
-      
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(() => {
-        console.log('Class unenrolled successfully');
+    async fetchClasses() {
+      const apiUrl = import.meta.env.VITE_GET_ALL_API;
+      const response = await fetch(apiUrl);
+      if (!response.ok) {
+        throw new Error(`Error fetching classes: status ${response.status}`);
+      }
+      this.responseData = await response.json();
+    },
 
-      //update the local data as well to show change
-        this.responseData.Items = this.responseData.Items.filter(item => item.courseid.S !== CourseID);
-      })
-      .catch(error => {
-        console.error('Error unenrolling class:', error);
-     
-      });
+    async getStudentInformation() {
+      const api = import.meta.env.VITE_GET_PERSON_DATA;
+      const response = await fetch(api);
+      if (!response.ok) {
+        throw new Error(`Error fetching student data: status ${response.status}`);
+      }
+      this.studentData = await response.json();
+    },
+
+    async enrollInClass(netid, CourseID) {
+      const api = import.meta.env.VITE_STUDENT_ENROLL;
+      try {
+        const response = await fetch(`${api}/${netid}/${CourseID}`, {
+          method: 'PUT',
+        });
+        if (!response.ok) {
+          throw new Error(`Error! status: ${response.status}`);
+        }
+        console.log('Successfully enrolled');
+        // Update student data locally, add logic as needed
+      } catch (error) {
+        console.error('Error enrolling:', error);
+        this.error = 'Error enrolling: ' + error.message;
+      }
+    },
+
+    isEnrolled(courseId) {
+      return this.studentData.Items.some(student => student.classes.L.some(classItem => classItem.S === courseId));
     }
   },
-
 };
 </script>
-  
+
 <style scoped>
   .container {
     display: flex;
@@ -132,5 +140,10 @@
   background-color: lightblue;
 }
 
+.loading, .error {
+    color: red;
+    text-align: center;
+  }
+
 </style>
-  
+

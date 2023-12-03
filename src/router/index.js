@@ -4,7 +4,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue";
-
 import ClassesView from "../views/ClassesView.vue";
 import ScheduleView from "../views/ScheduleView.vue";
 import ProfessorInformationView from "../views/ProfessorInformationView.vue";
@@ -12,7 +11,7 @@ import ClassInformationView from "../views/ClassInformationView.vue";
 import ProfileView from "../views/ProfileView.vue";
 import StudentClassesView from "../views/StudentClassesView.vue";
 import CreateClassView from "../views/CreateClassView.vue";
-
+import AdminDeleteView from "../views/AdminDeleteView.vue";
 
 
 const router = createRouter({
@@ -82,6 +81,12 @@ const router = createRouter({
       name: "create",
       component: CreateClassView,
     },
+
+    {
+      path: "/delete",
+      name: "delete",
+      component: AdminDeleteView,
+    }
 
   ],
 });

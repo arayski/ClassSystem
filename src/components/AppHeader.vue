@@ -7,7 +7,8 @@
             <RouterLink to="/search">Select Classes</RouterLink>
             <RouterLink to="/Schedule">Schedule</RouterLink>
             <RouterLink to="/Profile">Profile</RouterLink>
-            <RouterLink to="/create">Add Class</RouterLink>
+            <RouterLink to="/create">Add Classes</RouterLink>
+            <RouterLink to="/delete">Delete Classes</RouterLink>
 
 
             <!--
@@ -16,6 +17,7 @@
             -->
             <!--<RouterLink :to="{ name: 'form' }">Form Example</RouterLink>-->
             <RouterLink to="/login">Logout</RouterLink>
+            
             
       </nav>
     </div>

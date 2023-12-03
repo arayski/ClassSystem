@@ -42,13 +42,22 @@ async function handleSubmit() {
 
         if (response.ok) {
             //store netid to get items in db
-            localStorage.setItem('username', username.value);
-            //for getting user const value = localStorage.getItem('username');
-            // removing : localStorage.removeItem('myKey');
-            // clearing : localStorage.clear();
-            //successful login
+            //Save data to sessionStorage
+            sessionStorage.setItem('username', username.value);
 
-            router.push('/'); 
+            // Get saved data from sessionStorage
+            //let data = sessionStorage.getItem("key");
+
+            // Remove saved data from sessionStorage
+            //sessionStorage.removeItem("key");
+
+            // Remove all saved data from sessionStorage
+            //sessionStorage.clear();
+
+            //localStorage.setItem('username', username.value);
+            
+
+            router.push('/home');  
         } else {
             const errorData = await response.json();
             if (response.status === 401) {

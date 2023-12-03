@@ -2,13 +2,17 @@
   <header class="app-header">
     <div>
       <nav class="nav">
-            <RouterLink to="/">Home</RouterLink>
-            <RouterLink to="/classes">Enrolled Classes</RouterLink>
-            <RouterLink to="/search">Select Classes</RouterLink>
-            <RouterLink to="/Schedule">Schedule</RouterLink>
-            <RouterLink to="/Profile">Profile</RouterLink>
-            <RouterLink to="/create">Add Classes</RouterLink>
-            <RouterLink to="/delete">Delete Classes</RouterLink>
+
+            <RouterLink to="/home" v-if="userRole === 'student'">Home</RouterLink>
+            <RouterLink to="/classes" v-if="userRole === 'student'">Enrolled Classes</RouterLink>
+            <RouterLink to="/search" v-if="userRole === 'student'">Select Classes</RouterLink>
+            <RouterLink to="/Schedule" v-if="userRole === 'student'">Schedule</RouterLink>
+            <RouterLink to="/Profile" v-if="userRole === 'student'">Profile</RouterLink>
+
+            <!-- Admin Links -->
+            <RouterLink to="/create" v-if="userRole === 'admin'">Add Classes</RouterLink>
+            <RouterLink to="/delete" v-if="userRole === 'admin'">Delete Classes</RouterLink>
+
 
 
             <!--
@@ -16,7 +20,7 @@
               Check out router/index.js for how this is defined
             -->
             <!--<RouterLink :to="{ name: 'form' }">Form Example</RouterLink>-->
-            <RouterLink to="/login">Logout</RouterLink>
+            <button @click="handleLogout" class="logout-button">Logout</button>
             
             
       </nav>
@@ -25,8 +29,26 @@
 </template>
 
 <script setup>
-// import the <RouterLink> component so that we can use it in the template above
+
 import { RouterLink } from "vue-router";
+import { useRouter } from 'vue-router';
+import { ref, onMounted } from 'vue';
+
+const router = useRouter();
+
+const userRole = ref(null); 
+
+onMounted(async () => {
+  try {
+    const role = await getRole();
+    userRole.value = role; 
+  } catch (error) {
+    console.error(error);
+   
+  }
+});
+
+
 
 // give this component a title property so that the parent component (app.vue) can set whatever title it wants
 defineProps({
@@ -35,6 +57,31 @@ defineProps({
     required: true,
   },
 });
+
+
+function handleLogout() {
+  sessionStorage.clear(); 
+
+  router.push('/');
+}
+
+
+function getRole() {
+  const netid = sessionStorage.getItem('username');
+  if (!netid) {
+    return Promise.reject('No user logged in');
+  }
+
+  return fetch(`https://791afceg63.execute-api.us-east-1.amazonaws.com/prod/${netid}`)
+    .then(response => response.json())
+    .then(data => data.Item.role) 
+    .catch(error => {
+      console.error('Error fetching data:', error);
+      return null; 
+    });
+}
+
+
 </script>
 
 <style>
@@ -61,7 +108,7 @@ defineProps({
 }
 
 
-/* make the title within the header a larger and bolder font */
+
 .app-header h1 {
   font-size: 2rem;
   font-weight: bold;

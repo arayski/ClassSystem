@@ -7,7 +7,7 @@
             <RouterLink to="/search">Select Classes</RouterLink>
             <RouterLink to="/Schedule">Schedule</RouterLink>
             <RouterLink to="/Profile">Profile</RouterLink>
-
+            <RouterLink to="/create">Add Class</RouterLink>
 
 
             <!--

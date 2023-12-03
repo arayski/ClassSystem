@@ -11,6 +11,7 @@ import ProfessorInformationView from "../views/ProfessorInformationView.vue";
 import ClassInformationView from "../views/ClassInformationView.vue";
 import ProfileView from "../views/ProfileView.vue";
 import StudentClassesView from "../views/StudentClassesView.vue";
+import CreateClassView from "../views/CreateClassView.vue";
 
 
 
@@ -75,6 +76,13 @@ const router = createRouter({
       name: "classes",
       component: StudentClassesView,
     },
+
+    {
+      path: "/create",
+      name: "create",
+      component: CreateClassView,
+    },
+
   ],
 });
 

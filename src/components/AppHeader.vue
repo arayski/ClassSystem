@@ -65,4 +65,18 @@ defineProps({
   font-weight: bold;
   color:white;
 }
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  /*padding: 20px;
+  min-height: 100vh;8*/
+  background-color: rgb(234, 242, 255);
+}
+
 </style>

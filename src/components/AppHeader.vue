@@ -71,8 +71,9 @@ function getRole() {
   if (!netid) {
     return Promise.reject('No user logged in');
   }
-
-  return fetch(`https://791afceg63.execute-api.us-east-1.amazonaws.com/prod/${netid}`)
+  const api = import.meta.env.VITE_API
+  
+  return fetch(`${api}/prod/${netid}`)
     .then(response => response.json())
     .then(data => data.Item.role) 
     .catch(error => {

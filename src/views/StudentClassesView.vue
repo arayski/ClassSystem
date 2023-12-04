@@ -1,49 +1,51 @@
 <template>
-    <div class="main">
-      <h1>Enrolled Classes</h1>
-      <div class="container">
-        <div v-for="item in data.Items" :key="item.netid.S">
-        <div class="class-box" v-for="classtitle in item.classes.L" :key="classtitle.S">
+  <div class="main">
+    <h1>Enrolled Classes</h1>
+    <div class="container" v-if="!loading">
+      <div v-for="(classItem, index) in data.Item.classes" :key="index">
+        <div class="class-box">
           <div class="class-content">
-
-            <h2>{{ classtitle.S }}</h2>
-
+            <h2>{{ classItem }}</h2>
           </div>
-          <button class="removebutton" @click="unenrollClass(item.netid.S, classtitle.S)">Unenroll</button>
-        </div>
+          <button class="removebutton" @click="unenrollClass(data.Item.netid, classItem)">Unenroll</button>
         </div>
       </div>
     </div>
-  </template>
-  
-<script>
-  export default {
-    data() {
-      return {
-        loading: true,
-        data: {},
+    <div v-if="loading">Loading...</div>
+    <div v-if="error">{{ error }}</div>
+  </div>
+</template>
 
-      };
-    },
-    async mounted() {
-    const api = import.meta.env.VITE_GET_PERSON_DATA;
-    console.log(api)
+<script>
+  
+export default {
+  data() {
+    return {
+      loading: true,
+      data: {},
+      error: null
+    };
+  },
+  async mounted() {
+    const api = import.meta.env.VITE_API;
+    const netid = sessionStorage.getItem('username');
+    if (!netid) {
+      this.error = 'No user logged in';
+      return;
+    }
     try {
-      const response = await fetch(api);
+      const response = await fetch(`${api}/prod/${netid}`);
       if (!response.ok) {
         throw new Error(`Error!!! status: ${response.status}`);
       }
       this.data = await response.json();
-      
-    } 
-    catch (error) {
+    } catch (error) {
+      this.error = 'Error fetching data: ' + error.message;
       console.error('error fetching data:', error);
-    } 
-    finally {
+    } finally {
       this.loading = false;
     }
   },
-
   methods: {
     async unenrollClass(netid, CourseID) {
       const api = import.meta.env.VITE_DELETE_STUDENT_COURSE;
@@ -54,22 +56,15 @@
         if (!response.ok) {
           throw new Error(`Error!!! status: ${response.status}`);
         }
-        //
         console.log('Successfully unenrolled');
-        
-        // update the data locally
-        const student = this.data.Items.find(item => item.netid.S === netid);
-        if (student) {
-            student.classes.L = student.classes.L.filter(course => course.S !== CourseID);
-        }
-
+        this.data.Item.classes = this.data.Item.classes.filter(course => course !== CourseID);
       } catch (error) {
+        this.error = 'Error unenrolling: ' + error.message;
         console.error('Error unenrolling:', error);
       }
     },
   },
 };
-      
 
 /* fetch(import.meta.env.VITE_API_ENDPOINT)
 .then(response => response.json())
@@ -77,6 +72,8 @@
     console.log(data)
 })*/
 </script>
+
+
   
 <style>
   .container {

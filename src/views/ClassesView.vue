@@ -6,15 +6,15 @@
       <div class="class-box" v-for="item in responseData.Items" :key="item.courseid.S">
         <div class="class-content">
           <h2>{{ item.courseid.S }}</h2>
+          
           <p v-if="isEnrolled(item.courseid.S)">Enrolled</p>
-          <button class="removebutton" @click="enrollInClass('joe12345', item.courseid.S)" v-else>Enroll</button>
+          <button class="enrollbutton" @click="enrollInClass(item.courseid.S)" v-else>Enroll</button>
         </div>
       </div>
     </div>
     <div v-if="error" class="error">{{ error }}</div>
   </div>
 </template>
-
 <script>
 export default {
   data() {
@@ -27,11 +27,11 @@ export default {
   },
 
   async mounted() {
+    this.loading = true;
     try {
       await Promise.all([this.fetchClasses(), this.getStudentInformation()]);
     } catch (error) {
       this.error = error.message;
-      console.error('Error in mounted:', error);
     } finally {
       this.loading = false;
     }
@@ -40,45 +40,78 @@ export default {
   methods: {
     async fetchClasses() {
       const apiUrl = import.meta.env.VITE_GET_ALL_API;
-      const response = await fetch(apiUrl);
-      if (!response.ok) {
-        throw new Error(`Error fetching classes: status ${response.status}`);
+      try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+          throw new Error(`Error fetching classes: status ${response.status}`);
+        }
+        this.responseData = await response.json();
+      } catch (error) {
+        console.error('Error fetching classes:', error);
+        throw error;
       }
-      this.responseData = await response.json();
     },
-
+    
     async getStudentInformation() {
-      const api = import.meta.env.VITE_GET_PERSON_DATA;
-      const response = await fetch(api);
-      if (!response.ok) {
-        throw new Error(`Error fetching student data: status ${response.status}`);
+      const netid = sessionStorage.getItem('username');
+      if (!netid) {
+        throw new Error('No user logged in');
       }
-      this.studentData = await response.json();
+      const api = import.meta.env.VITE_API;
+      try {
+        const response = await fetch(`${api}/prod/${netid}`);
+        if (!response.ok) {
+          throw new Error(`Error fetching student data: status ${response.status}`);
+        }
+        this.studentData = await response.json();
+      } catch (error) {
+        console.error('Error fetching student data:', error);
+        throw error;
+      }
     },
 
-    async enrollInClass(netid, CourseID) {
+    async enrollInClass(courseId) {
+      const netid = sessionStorage.getItem('username');
+      if (!netid) {
+        this.error = 'No user logged in';
+        return;
+      }
       const api = import.meta.env.VITE_STUDENT_ENROLL;
       try {
-        const response = await fetch(`${api}/${netid}/${CourseID}`, {
+        const response = await fetch(`${api}/${netid}/${courseId}`, {
           method: 'PUT',
         });
         if (!response.ok) {
           throw new Error(`Error! status: ${response.status}`);
         }
         console.log('Successfully enrolled');
-        // Update student data locally, add logic as needed
+        this.getStudentInformation(); // Update student data locally
       } catch (error) {
         console.error('Error enrolling:', error);
         this.error = 'Error enrolling: ' + error.message;
       }
     },
 
+    
     isEnrolled(courseId) {
-      return this.studentData.Items.some(student => student.classes.L.some(classItem => classItem.S === courseId));
-    }
+  // Check if studentData, Item, classes, and L are defined
+  if (this.studentData && 
+      this.studentData.Item && 
+      this.studentData.Item.classes && 
+      Array.isArray(this.studentData.Item.classes.L)) {
+    return this.studentData.Item.classes.L.some(classItem => classItem.S === courseId);
+  }
+  return false; // Return false if any of the properties are not defined
+}
+
+
+
+
+
   },
 };
 </script>
+
 
 <style scoped>
   .container {
@@ -143,6 +176,15 @@ export default {
 .loading, .error {
     color: red;
     text-align: center;
+  }
+
+  .enrollbutton {
+    background-color: green;
+    /* Rest of the styles */
+  }
+
+  .enrollbutton:hover {
+    background-color: lightgreen;
   }
 
 </style>

@@ -110,8 +110,13 @@
 
 
 <style scoped>
+.searchmodify {
+  padding-left: 20px; /* Adjust this value as needed */
+  background: white url("searchicon.png");
+  border: 1px;
+  border-radius: 25px;
+}
 .container {
-    max-width: 600px;
     margin: auto;
     padding: 20px;
     background-color: #f5f5f5;
@@ -119,29 +124,33 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+
 .form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: auto;
 }
+
 
 .form div {
   display: flex;
   flex-direction: column;
 }
 
+
 .label {
   font-weight: bold;
   margin-bottom: 5px;
 }
 
-.input,
-.select {
+
+.input, .select {
   padding: 8px;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 16px;
 }
+
 
 .submit-button {
   background-color: #007bff;
@@ -154,13 +163,16 @@
   transition: background-color 0.3s;
 }
 
+
 .submit-button:hover {
   background-color: #0056b3;
 }
+
 
 .response {
   margin-top: 20px;
   color: green;
   font-size: 18px;
 }
+
 </style>

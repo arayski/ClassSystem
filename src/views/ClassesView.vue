@@ -6,6 +6,10 @@
       <div class="class-box" v-for="item in responseData.Items" :key="item.courseid.S">
         <div class="class-content">
           <h2>{{ item.courseid.S }}</h2>
+          <p><strong>Location:</strong> {{ item.location.S }}</p>
+          <p><strong>Time:</strong> {{ item.time.S }}</p>
+          <p><strong>Professor:</strong> {{ item.instructor.S }}</p>
+          <p><strong>Description:</strong> {{ item.description.S }}</p>
           
           <p v-if="isEnrolled(item.courseid.S)">Enrolled</p>
           <button class="enrollbutton" @click="enrollInClass(item.courseid.S)" v-else>Enroll</button>
@@ -22,7 +26,9 @@ export default {
       loading: true,
       responseData: {},
       studentData: {},
-      error: null
+      error: null,
+      showModal: false,
+      selectedClass: null,
     };
   },
 
@@ -102,10 +108,7 @@ export default {
     return this.studentData.Item.classes.L.some(classItem => classItem.S === courseId);
   }
   return false; // Return false if any of the properties are not defined
-}
-
-
-
+  }
 
 
   },
@@ -158,7 +161,7 @@ export default {
     margin-top: 10px;
   }
 
-  .removebutton {
+  .enrollbutton {
     background-color: blue;
     color: white;
     border: none;
@@ -169,22 +172,13 @@ export default {
   
 }
 
-.removebutton:hover {
+.enrollbutton:hover {
   background-color: lightblue;
 }
 
 .loading, .error {
     color: red;
     text-align: center;
-  }
-
-  .enrollbutton {
-    background-color: green;
-    /* Rest of the styles */
-  }
-
-  .enrollbutton:hover {
-    background-color: lightgreen;
   }
 
 </style>

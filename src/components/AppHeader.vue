@@ -108,6 +108,19 @@ function getRole() {
   color:#000E2F; 
 }
 
+.logout-button {
+  color:white;
+  padding: 16px;
+  text-decoration: none;
+  font-size: 17px;
+  margin-right: 5px;
+  background-color: #000E2F;
+}
+
+.logout-button a:hover{
+  background-color:#ddd;
+  color:#000E2F; 
+}
 
 
 .app-header h1 {

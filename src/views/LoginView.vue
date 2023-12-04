@@ -80,34 +80,49 @@ async function handleSubmit() {
 
 <style scoped>
     .login-page {
-    height: 100vh; 
-    background-image: url('../assets/loginbackdrop.jpeg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+        height: 100vh; 
+        background-image: url('../assets/loginbackdrop.jpeg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative; /* Added position property */
+    }
+
+    /* Add a semi-transparent overlay with a blue tint */
+    .login-page::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #00002F;
+        opacity: 0.75; /* Adjust the opacity as needed */
     }
 
     .login-container {
-    background-color: rgba(255, 255, 255, 0.8); 
-    padding: 50px;
-    border-radius: 5px; 
-    max-width: 400px; 
-    margin: 0 auto; 
-    
+        background-color: #F2F2F2;  /* Set the background color to white with no opacity */
+        padding: 50px;
+        border-radius: 5px; 
+        max-width: 400px; 
+        margin: 0 auto; 
+        position: absolute; /* Added position property */
+        top: 50%; /* Center the login container vertically */
+        left: 50%; /* Center the login container horizontally */
+        transform: translate(-50%, -50%); /* Center the login container */
     }
 
     .login-container label {
         font-size: 30px;
         color: #000E2F;
-        
     }
-
 
     .login-container input {
         font-size: 30px;
         border-radius: 10px;
         color: #000E2F;
         width: 100%;
+        margin-top: 10px; /* Added margin for spacing */
     }
 
     .login-container button {
@@ -118,23 +133,12 @@ async function handleSubmit() {
         margin-top: 20px;
         border-radius: 5px;
         padding: 10px;
-        background-color:#000E2F;
-        color:white;
+        background-color: #000E2F;
+        color: white;
     }
 
     .error-message {
         color: red;
     }
-            
-
-/* const useNetID = 'admin';
-    const usePassword = 'admin';
-    // Example validation logic
-    if (NetID.value === useNetID && password.value === usePassword) {
-        router.push('/home');
-    } 
-    else{
-        alert('Invalid NetID or Password.');
-    } */
 </style>
 
